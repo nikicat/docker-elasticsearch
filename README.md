@@ -20,6 +20,9 @@ seed the service's configuration:
     `ElasticSearch cluster`;
   - `ELASTICSEARCH_CONFIG_NODE_NAME`, the name of this ElasticSearch node,
     driving the `node.name` configuration setting. Defaults to `Local node`;
+  - `ELASTICSEARCH_CONFIG_DATA_PATH`, a path, or comma-separated list of paths,
+    to where ElasticSearch will store the persistent node data. Defaults to
+    `/var/lib/elasticsearch`;
   - `ELASTICSEARCH_CONFIG_PEER_PORT`, the TCP port used by node-to-node
     communications, driving the `transport.tcp.port` setting. Defaults to 9300;
   - `ELASTICSEARCH_CONFIG_HTTP_PORT`, the HTTP port for the ElasticSearch REST
