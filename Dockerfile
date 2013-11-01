@@ -22,4 +22,5 @@ RUN rm -rf /tmp/elasticsearch-zookeeper
 ADD run.py /opt/elasticsearch-0.90.5/.docker/
 
 WORKDIR /opt/elasticsearch-0.90.5
+VOLUME /var/lib/elasticsearch
 CMD ["python", "/opt/elasticsearch-0.90.5/.docker/run.py"]

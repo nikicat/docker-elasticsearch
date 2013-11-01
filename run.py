@@ -15,7 +15,6 @@ ELASTICSEARCH_CONFIG_FILE = 'config/elasticsearch.yml'
 # Environment variables that drive ElasticSearch's configuration and their defaults.
 ELASTICSEARCH_CONFIG_CLUSTER_NAME = os.environ.get('ELASTICSEARCH_CONFIG_CLUSTER_NAME', 'local-elasticsearch')
 ELASTICSEARCH_CONFIG_NODE_NAME = os.environ.get('ELASTICSEARCH_CONFIG_NODE_NAME', 'local-es-node')
-ELASTICSEARCH_CONFIG_DATA_PATH = os.environ.get('ELASTICSEARCH_CONFIG_DATA_PATH', '/var/lib/elasticsearch')
 ELASTICSEARCH_CONFIG_PEER_PORT = int(os.environ.get('ELASTICSEARCH_CONFIG_PEER_PORT', 9300))
 ELASTICSEARCH_CONFIG_HTTP_PORT = int(os.environ.get('ELASTICSEARCH_CONFIG_HTTP_PORT', 9200))
 ELASTICSEACRH_CONFIG_ZOOKEEPER_BASE = os.environ.get('ELASTICSEACRH_CONFIG_ZOOKEEPER_BASE', '/local/elasticsearch')
@@ -35,7 +34,7 @@ with open(ELASTICSEARCH_CONFIG_FILE, 'w+') as conf:
     yaml.dump({
         'cluster.name': ELASTICSEARCH_CONFIG_CLUSTER_NAME,
         'node.name': ELASTICSEARCH_CONFIG_NODE_NAME,
-        'path.data': ELASTICSEARCH_CONFIG_DATA_PATH,
+        'path.data': '/var/lib/elasticsearch',
         'transport.tcp.port': ELASTICSEARCH_CONFIG_PEER_PORT,
         'http.port': ELASTICSEARCH_CONFIG_HTTP_PORT,
         'network.publish_host': CONTAINER_HOST_ADDRESS,
