@@ -18,23 +18,29 @@ Environment variables
 The following environment variables are understood by the startup script to
 seed the service's configuration:
 
+  - `CONTAINER_NAME` should contain the logical name of the container,
+    which will be used for looking up links and ports informations from the
+    other environment variables. For this, the name is uppercased and
+    non-alphanumeric characters are replaced by underscores. The container name
+    will also be used as the ElasticSearch node name;
   - `CONTAINER_HOST_ADDRESS` should contain the address of the Docker
     container's host. It's used by the ElasticSearch ZooKeeper-based discovery
     plugin as the advertised address for node discovery and is required for the
     container to start;
+
   - `ELASTICSEARCH_CONFIG_CLUSTER_NAME`, the ElasticSearch cluster name,
     driving the `cluster.name` configuration setting. Defaults to
     `ElasticSearch cluster`;
-  - `ELASTICSEARCH_CONFIG_NODE_NAME`, the name of this ElasticSearch node,
-    driving the `node.name` configuration setting. Defaults to `Local node`;
-  - `ELASTICSEARCH_CONFIG_PEER_PORT`, the TCP port used by node-to-node
+  - `ELASTICSEARCH_<NAME>_PEER_PORT`, the TCP port used by node-to-node
     communications, driving the `transport.tcp.port` setting. Defaults to 9300;
-  - `ELASTICSEARCH_CONFIG_HTTP_PORT`, the HTTP port for the ElasticSearch REST
+  - `ELASTICSEARCH_<NAME>_HTTP_PORT`, the HTTP port for the ElasticSearch REST
     API, driving the `http.port` setting. Defaults to 9200;
   - `ELASTICSEARCH_CONFIG_ZOOKEEPER_BASE`, the ZooKeeper base zNode path to be
     used by the discovery plugin. Defaults to `/local/elasticsearch`;
-  - `ZOOKEEPER_NODE_LIST`, the comma-separated list of ZooKeeper nodes to
-    connect to for node discovery.
+
+ElasticSearch depends on ZooKeeper for discovery. It thus expects the following
+environment variables for each ZooKeeper node to construct the node list:
+`ZOOKEEPER_<ZK_NODE_NAME>_HOST` and `ZOOKEEPER_<ZK_NODE_NAME>_CLIENT_PORT`.
 
 Volumes
 -------
