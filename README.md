@@ -45,7 +45,7 @@ environment variables for each ZooKeeper node to construct the node list:
 Volumes
 -------
 
-The ElasticSearch image uses the following volumes you way want to bind from
+The ElasticSearch image uses the following volumes you may want to bind from
 the container's host:
 
   - `/var/lib/elasticsearch`, for the ElasticSearch indeces storage.

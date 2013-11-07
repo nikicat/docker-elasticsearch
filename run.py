@@ -1,11 +1,18 @@
 #!/usr/bin/env python
 
-# Start script for ElasticSearch
+# Copyright (C) 2013 SignalFuse, Inc.
+
+# Start script for ElasticSearch.
+# Requires python-yaml for configuration writing.
 
 import os
 import re
 import sys
 import yaml
+
+if __name__ != '__main__':
+    sys.stderr.write('This script is only meant to be executed.\n')
+    sys.exit(1)
 
 os.chdir(os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
@@ -13,18 +20,22 @@ os.chdir(os.path.join(
 
 ELASTICSEARCH_CONFIG_FILE = 'config/elasticsearch.yml'
 
+# Get container/instance name.
 CONTAINER_NAME = os.environ.get('CONTAINER_NAME', '')
 assert CONTAINER_NAME, 'Container name is missing!'
 ELASTICSEARCH_CONFIG_BASE = re.sub(r'[^\w]', '_', CONTAINER_NAME).upper()
 
+# Get container's host IP address/hostname.
 CONTAINER_HOST_ADDRESS = os.environ.get('CONTAINER_HOST_ADDRESS', '')
 assert CONTAINER_HOST_ADDRESS, 'Container host address is required for ElasticSearch discovery!'
 
+# Gather configuration settings from environment.
 ELASTICSEARCH_CONFIG_CLUSTER_NAME = os.environ.get('ELASTICSEARCH_CONFIG_CLUSTER_NAME', 'local-elasticsearch')
 ELASTICSEACRH_CONFIG_ZOOKEEPER_BASE = os.environ.get('ELASTICSEACRH_CONFIG_ZOOKEEPER_BASE', '/local/elasticsearch')
 ELASTICSEARCH_CONFIG_PEER_PORT = int(os.environ.get('ELASTICSEARCH_%s_PEER_PORT' % ELASTICSEARCH_CONFIG_BASE, 9300))
 ELASTICSEARCH_CONFIG_HTTP_PORT = int(os.environ.get('ELASTICSEARCH_%s_HTTP_PORT' % ELASTICSEARCH_CONFIG_BASE, 9200))
 
+# Build ZooKeeper node list with host and client port for each node.
 ZOOKEEPER_NODE_LIST = []
 for k, v in os.environ.iteritems():
     m = re.match(r'^ZOOKEEPER_(\w+)_HOST$', k)
