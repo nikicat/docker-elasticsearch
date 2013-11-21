@@ -18,6 +18,8 @@ Environment variables
 The following environment variables are understood by the startup script to
 seed the service's configuration:
 
+  - `SERVICE_NAME` should contain the logical name of the service this
+    container is an instance of;
   - `CONTAINER_NAME` should contain the logical name of the container,
     which will be used for looking up links and ports informations from the
     other environment variables. For this, the name is uppercased and
@@ -28,15 +30,17 @@ seed the service's configuration:
     plugin as the advertised address for node discovery and is required for the
     container to start;
 
-  - `ELASTICSEARCH_CONFIG_CLUSTER_NAME`, the ElasticSearch cluster name,
-    driving the `cluster.name` configuration setting. Defaults to
-    `ElasticSearch cluster`;
-  - `ELASTICSEARCH_<NAME>_PEER_PORT`, the TCP port used by node-to-node
-    communications, driving the `transport.tcp.port` setting. Defaults to 9300;
-  - `ELASTICSEARCH_<NAME>_HTTP_PORT`, the HTTP port for the ElasticSearch REST
-    API, driving the `http.port` setting. Defaults to 9200;
-  - `ELASTICSEARCH_CONFIG_ZOOKEEPER_BASE`, the ZooKeeper base zNode path to be
+  - `CLUSTER_NAME`, the ElasticSearch cluster name, driving the
+    `cluster.name` configuration setting. Defaults to
+    `local-elasticsearch`;
+  - `ZOOKEEPER_BASE`, the ZooKeeper base zNode path to be
     used by the discovery plugin. Defaults to `/local/elasticsearch`;
+  - `<SERVICE_NAME>_<CONTAINER_NAME>_PEER_PORT`, the TCP port used by
+    node-to-node communications, driving the `transport.tcp.port`
+    setting. Defaults to 9300;
+  - `<SERVICE_NAME>_<CONTAINER_NAME>_HTTP_PORT`, the HTTP port for the
+    ElasticSearch REST API, driving the `http.port` setting. Defaults to
+    9200;
 
 ElasticSearch depends on ZooKeeper for discovery. It thus expects the following
 environment variables for each ZooKeeper node to construct the node list:
