@@ -19,7 +19,8 @@ os.chdir(os.path.join(
 # Prepare the YAML configuration and write it.
 with open(os.path.join('config', 'elasticsearch.yml'), 'w+') as conf:
     yaml.dump({
-        'cluster.name': os.environ.get('CLUSTER_NAME', 'local-elasticsearch'),
+        'cluster.name': os.environ.get('CLUSTER_NAME',
+                                       '{}-elasticsearch'.format(get_environment_name())),
         'node.name': get_container_name(),
         'path.data': '/var/lib/elasticsearch',
         'transport.tcp.port': get_port('peer', 9300),
@@ -34,7 +35,8 @@ with open(os.path.join('config', 'elasticsearch.yml'), 'w+') as conf:
                 'client.host': ','.join(get_node_list('zookeeper', ports=['client'])),
                 'discovery.state_publishing.enabled': True,
         },
-        'zookeeper.root': os.environ.get('ZOOKEEPER_BASE', '/local/elasticsearch'),
+        'zookeeper.root': os.environ.get('ZOOKEEPER_BASE',
+                                         '/{}/elasticsearch'.format(get_environment_name())),
     }, conf, default_flow_style=False)
 
 # Start ElasticSearch
