@@ -9,7 +9,7 @@ RUN apt-get update
 RUN apt-get -y install python-yaml python-setuptools maven
 
 # Install Maestro for guest utils
-RUN easy_install http://github.com/signalfuse/maestro-ng/archive/maestro-0.1.0.zip
+RUN easy_install http://github.com/signalfuse/maestro-ng/archive/maestro-0.1.4.zip
 
 # Get the latest stable version of ElasticSearch
 RUN wget -q -O - https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.5.tar.gz \
