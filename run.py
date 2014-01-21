@@ -6,7 +6,6 @@
 # Requires python-yaml for configuration writing.
 
 import os
-import re
 import sys
 import yaml
 

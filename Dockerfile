@@ -1,15 +1,14 @@
 # Dockerfile for ElasticSearch
 
-FROM mpetazzoni/maestro-base
-
+FROM quay.io/signalfuse/maestro-base:0.1.5
 MAINTAINER Maxime Petazzoni <max@signalfuse.com>
 
-# Python YAML is required to generate ElasticSearch's configuration
+ENV DEBIAN_FRONTEND noninteractive
+
+# Python YAML is required to generate ElasticSearch's configuration. Maven is
+# needed to build the elasticsearch-zookeeper plugin.
 RUN apt-get update
 RUN apt-get -y install python-yaml python-setuptools maven
-
-# Install Maestro for guest utils
-RUN easy_install http://github.com/signalfuse/maestro-ng/archive/maestro-0.1.4.zip
 
 # Get the latest stable version of ElasticSearch
 RUN wget -q -O - https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.5.tar.gz \
