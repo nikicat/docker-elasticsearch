@@ -1,6 +1,6 @@
 # Dockerfile for ElasticSearch
 
-FROM quay.io/signalfuse/maestro-base:0.1.5
+FROM quay.io/signalfuse/maestro-base:0.1.6
 MAINTAINER Maxime Petazzoni <max@signalfuse.com>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -26,4 +26,5 @@ ADD run.py /opt/elasticsearch-0.90.5/.docker/
 
 WORKDIR /opt/elasticsearch-0.90.5
 VOLUME /var/lib/elasticsearch
+VOLUME /var/log/elasticsearch
 CMD ["python", "/opt/elasticsearch-0.90.5/.docker/run.py"]

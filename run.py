@@ -6,10 +6,10 @@
 # Requires python-yaml for configuration writing.
 
 import os
-import sys
 import yaml
 
 from maestro.guestutils import *
+from maestro.extensions.logging.logstash import run_service
 
 os.chdir(os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
@@ -39,4 +39,8 @@ with open(os.path.join('config', 'elasticsearch.yml'), 'w+') as conf:
     }, conf, default_flow_style=False)
 
 # Start ElasticSearch
-os.execl('bin/elasticsearch', 'elasticsearch', '-f')
+run_service(['bin/elasticsearch', '-f'],
+# TODO(mpetazzoni): use logtype with next version of Maestro.
+#        logtype='elasticsearch',
+        logbase='/var/log/elasticsearch',
+        logtarget='logstash')
