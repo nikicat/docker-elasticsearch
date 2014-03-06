@@ -52,7 +52,7 @@ Volumes
 The ElasticSearch image uses the following volumes you may want to bind from
 the container's host:
 
-  - `/var/lib/elasticsearch`, for the ElasticSearch indeces storage.
+  - `/var/lib/elasticsearch`, for the ElasticSearch indices storage.
 
 Usage
 -----
