@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (C) 2013 SignalFuse, Inc.
+# Copyright (C) 2013-2014 SignalFuse, Inc.
 
 # Start script for ElasticSearch.
 # Requires python-yaml for configuration writing.
@@ -39,7 +39,7 @@ with open(os.path.join('config', 'elasticsearch.yml'), 'w+') as conf:
     }, conf, default_flow_style=False)
 
 # Start ElasticSearch
-run_service(['bin/elasticsearch', '-f'],
+run_service(['bin/elasticsearch'],
 # TODO(mpetazzoni): use logtype with next version of Maestro.
 #        logtype='elasticsearch',
         logbase='/var/log/elasticsearch',
