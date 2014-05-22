@@ -28,6 +28,9 @@ RUN rm -rf /tmp/elasticsearch-zookeeper
 # Install Marvel plugin
 RUN /usr/share/elasticsearch/bin/plugin -v -i elasticsearch/marvel/latest
 
+# Install Elasticsearch Head plugin
+RUN /usr/share/elasticsearch/bin/plugin -v -i mobz/elasticsearch-head
+
 ADD run.py /etc/elasticsearch/.docker/
 ADD mapping.json /etc/elasticsearch/
 
