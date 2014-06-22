@@ -1,6 +1,6 @@
 # Dockerfile for ElasticSearch
 
-FROM yandex/ubuntu:14.04
+FROM yandex/trusty
 MAINTAINER Nikolay Bryskin <devel.niks@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
